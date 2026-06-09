@@ -3,7 +3,7 @@
 ## Files and Data
 PREV_TOTAL=0
 PREV_IDLE=0
-cpuFile="/tmp/.cpu_usage"
+cpuFile="$HOME/.cache/eww_cpu_usage"
 
 ## Get CPU usage
 get_cpu() {

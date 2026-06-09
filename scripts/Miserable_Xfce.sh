@@ -53,11 +53,10 @@ check_dependencies() {
 # Setup directory structure
 setup_directories() {
     echo -e "${BLUE}Setting up directories...${NC}"
-    cd "/tmp/$REPO_DIR"
     
     for f in home/.* home/*; do
         if [ -e "$f" ] && [ "$f" != "home/." ] && [ "$f" != "home/.." ]; then
-            mv "$f" ~/
+            cp -rn "$f" ~/ || true
         fi
     done
     
@@ -67,7 +66,7 @@ setup_directories() {
 # Install picom animation fork
 install_picom_animation() {
     echo -e "${BLUE}Installing picom animation fork...${NC}"
-    cd /tmp
+    cd "$HOME"
     
     git clone -b animation-pr https://github.com/fdev31/picom.git
     cd picom
@@ -78,7 +77,7 @@ install_picom_animation() {
     
     # Cleanup
     cd ~
-    rm -rf /tmp/picom
+    rm -rf "$HOME/picom"
     
     echo -e "${GREEN}Picom animation fork installed successfully!${NC}"
 }
