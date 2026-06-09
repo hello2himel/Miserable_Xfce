@@ -8,8 +8,10 @@
 # Documentation of Icons to use for weather
 # https://erikflowers.github.io/weather-icons/api-list.html
 
+CACHE_DIR="$HOME/.cache/eww/weather"
+
 updateweather() {
-    [ -d "$HOME/.cache/eww/weather" ] || mkdir -p "$HOME/.cache/eww/weather"
+    [ -d "$CACHE_DIR" ] || mkdir -p "$CACHE_DIR"
     # Grab your own key from openweathermap
     KEY="insert_key_here"
     ID="insert_city_id_here"
@@ -192,16 +194,16 @@ updateweather() {
         desc="N/A"
         icon=""
     fi
-    echo "$weat" | jq ".main.temp" | cut -d "." -f 1 > "$HOME/.cache/eww/weather/temp"
-    echo "$LOCATION" > "$HOME/.cache/eww/weather/location"
-    echo "$desc" > "$HOME/.cache/eww/weather/description"
-    echo "$icon" > "$HOME/.cache/eww/weather/icon"
+    echo "$weat" | jq ".main.temp" | cut -d "." -f 1 > "$CACHE_DIR/temp"
+    echo "$LOCATION" > "$CACHE_DIR/location"
+    echo "$desc" > "$CACHE_DIR/description"
+    echo "$icon" > "$CACHE_DIR/icon"
 }
 
 case $1 in
-    --icon) cat "$HOME/.cache/eww/weather/icon" ;;
-    --desc) cat "$HOME/.cache/eww/weather/description" ;;
-    --temp) cat "$HOME/.cache/eww/weather/temp" ;;
-    --location) cat "$HOME/.cache/eww/weather/location" ;;
+    --icon) cat "$CACHE_DIR/icon" ;;
+    --desc) cat "$CACHE_DIR/description" ;;
+    --temp) cat "$CACHE_DIR/temp" ;;
+    --location) cat "$CACHE_DIR/location" ;;
     *) updateweather ;;
 esac

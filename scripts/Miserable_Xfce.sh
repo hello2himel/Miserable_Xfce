@@ -56,7 +56,7 @@ setup_directories() {
     
     for f in home/.* home/*; do
         if [ -e "$f" ] && [ "$f" != "home/." ] && [ "$f" != "home/.." ]; then
-            cp -r "$f" ~/
+            cp -rn "$f" ~/ || true
         fi
     done
     
