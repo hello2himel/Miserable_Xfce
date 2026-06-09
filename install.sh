@@ -108,7 +108,7 @@ install_core() {
 # Install customizations
 Miserable_Xfce(){
     echo "Launching Customization script..."
-    bash /tmp/scripts/Miserable_Xfce.sh
+    bash scripts/Miserable_Xfce.sh
     echo "Customization script finished executing finishing up...."
 }
 
@@ -118,24 +118,27 @@ install_aur_helper() {
     if [[ $OS == "arch" ]] && ! command -v yay &> /dev/null; then
         echo -e "${BLUE}Installing AUR helper...${NC}"
         $INSTALL_CMD git base-devel
-        cd /tmp
+        cd "$HOME"
         git clone https://aur.archlinux.org/yay.git
         cd yay
         makepkg -si --noconfirm
         cd ~
-        rm -rf /tmp/yay
+        rm -rf "$HOME/yay"
     fi
 }
 
 # Main menu
 show_menu() {
-
-    show_banner
-    echo "=============================="
-    echo "1. Miserable_Xfce installation"
-    echo "2. Exit"
-    echo
-    read -p "Choose option (1-3): " choice
+    if [ "$1" = "run" ]; then
+        choice=1
+    else
+        show_banner
+        echo "=============================="
+        echo "1. Miserable_Xfce installation"
+        echo "2. Exit"
+        echo
+        read -p "Choose option (1-2): " choice
+    fi
     
     case $choice in
         1)  install_core
@@ -162,16 +165,20 @@ main() {
     $UPDATE_CMD
     
     # Show menu
-    show_menu
+    show_menu "$1"
     
     # Done
     echo -e "${GREEN}Installation complete!${NC}"
     echo
     echo -e "${YELLOW}To use Xfce4, select 'Xfce' from the login screen${NC}"
     echo
-    read -p "Reboot now? (y/n): " reboot_choice
-    if [[ $reboot_choice =~ ^[Yy]$ ]]; then
-        sudo reboot
+    if [ "$1" = "run" ]; then
+        echo -e "${YELLOW}Please reboot your system now.${NC}"
+    else
+        read -p "Reboot now? (y/n): " reboot_choice
+        if [[ $reboot_choice =~ ^[Yy]$ ]]; then
+            sudo reboot
+        fi
     fi
 }
 

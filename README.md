@@ -14,10 +14,12 @@ A animated Xfce desktop environment with transitions and aesthetics. Everything 
 
 ## Installation
 
-Get the base setup running in one go!:
+Clone the repository and run the installation script:
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/mehedirm6244/Miserable_Xfce/refs/heads/Serenade/scripts/clone.sh)
+git clone https://github.com/mehedirm6244/Miserable_Xfce.git
+cd Miserable_Xfce
+./install.sh
 ```
 
 **After installation, reboot your system.** Then proceed to setup.
