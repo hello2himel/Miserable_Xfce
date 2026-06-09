@@ -80,19 +80,21 @@ install_core() {
     echo -e "${BLUE}Installing Xfce desktop environment...${NC}"
     case $OS in
     arch)
-        $INSTALL_CMD xfce4 xfce4-goodies sddm noto-fonts thunar xfce4-panel bat neofetch rofi i3lock-color skippy-xd eww onboard base-devel git meson ninja libxext libxcb xcb-util-damage xcb-util-renderutil libconfig dbus pixman libev uthash libgl libegl pcre2
+        install_aur_helper
+        $INSTALL_CMD xfce4 xfce4-goodies sddm noto-fonts thunar xfce4-panel bat fastfetch rofi onboard base-devel git meson ninja libxext libxcb xcb-util-renderutil libconfig dbus pixman libev uthash libgl libegl pcre2
+        yay -S --noconfirm i3lock-color skippy-xd eww
         sudo systemctl enable sddm
         ;;
     debian)
-        $INSTALL_CMD xfce4 xfce4-goodies lightdm lightdm-gtk-greeter fonts-noto thunar xfce4-panel bat neofetch rofi i3lock-color onboard libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson ninja-build git
+        $INSTALL_CMD xfce4 xfce4-goodies lightdm lightdm-gtk-greeter fonts-noto thunar xfce4-panel bat fastfetch rofi i3lock-color onboard libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl-dev libegl-dev libpcre2-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev meson ninja-build git
         sudo systemctl enable lightdm
         ;;
     fedora)
-        $INSTALL_CMD @xfce-desktop-environment lightdm lightdm-gtk google-noto-fonts thunar xfce4-panel bat neofetch rofi i3lock-color skippy-xd onboard dbus-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb libXext-devel libxcb-devel libGL-devel libEGL-devel meson pcre2-devel pixman-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorg-x11-proto-devel ninja-build
+        $INSTALL_CMD @xfce-desktop-environment lightdm lightdm-gtk google-noto-fonts thunar xfce4-panel bat fastfetch rofi i3lock-color skippy-xd onboard dbus-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb libXext-devel libxcb-devel libGL-devel libEGL-devel meson pcre2-devel pixman-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorg-x11-proto-devel ninja-build
         sudo systemctl enable lightdm
         ;;
     opensuse)
-        $INSTALL_CMD xfce4-session xfce4-panel xfce4-desktop xfce4-settings xfce4-appfinder thunar lightdm lightdm-gtk-greeter noto-fonts bat neofetch rofi i3lock-color onboard libxcb-devel libX11-devel libXext-devel pixman-devel libconfig-devel libdbus-1-devel libev-devel libGL-devel libEGL-devel pcre2-devel uthash-devel meson ninja git gcc
+        $INSTALL_CMD xfce4-session xfce4-panel xfce4-desktop xfce4-settings xfce4-appfinder thunar lightdm lightdm-gtk-greeter noto-fonts bat fastfetch rofi i3lock-color onboard libxcb-devel libX11-devel libXext-devel pixman-devel libconfig-devel libdbus-1-devel libev-devel libGL-devel libEGL-devel pcre2-devel uthash-devel meson ninja git gcc
         sudo systemctl enable lightdm
         ;;
     *)
